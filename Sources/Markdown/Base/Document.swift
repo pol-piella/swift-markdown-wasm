@@ -50,20 +50,6 @@ public extension Document {
         }
     }
 
-    /// Parse a file's contents into a `Document`.
-    ///
-    /// - parameter file: a file URL from which to load Markdown text to parse.
-    /// - parameter options: options for parsing Markdown text.
-    init(parsing file: URL, options: ParseOptions = []) throws {
-        let string = try String(contentsOf: file)
-        if options.contains(.parseBlockDirectives) {
-            self = BlockDirectiveParser.parse(string, source: file,
-                                              options: options)
-        } else {
-            self = MarkupParser.parseString(string, source: file, options: options)
-        }
-    }
-
     /// Create a document from a sequence of block markup elements.
     init<Children: Sequence>(_ children: Children) where Children.Element == BlockMarkup {
         try! self.init(.document(parsedRange: nil, children.map { $0.raw.markup }))

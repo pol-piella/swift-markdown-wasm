@@ -941,11 +941,6 @@ extension Document {
 }
 
 struct BlockDirectiveParser {
-    static func parse(_ input: URL, options: ParseOptions = []) throws -> Document {
-        let string = try String(contentsOf: input, encoding: .utf8)
-        return parse(string, source: input, options: options)
-    }
-
     /// Parse the input.
     static func parse(_ input: String, source: URL?,
                       options: ParseOptions = []) -> Document {
